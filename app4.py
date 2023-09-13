@@ -48,7 +48,7 @@ song_chain = LLMChain(llm=chat, prompt=song_template, output_key = 'song', memor
 seq_chain = SequentialChain(chains=[text_chain, song_chain], input_variables = ['text','theme'], return_all = True, verbose=True)
 
 if prompt1 and prompt2:
-    response = seq_chain({'text':prompt1, 'theme': prompt2,})
+    response = seq_chain({'text':prompt1, 'theme': prompt2})
     st.markdown('**📄Summary**')
     st.write(response['sum'])
     st.markdown('**🎤Lyrics**')
