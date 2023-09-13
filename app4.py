@@ -1,5 +1,4 @@
 import os
-from apikey import apikey
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.schema import HumanMessage
 from langchain.chat_models import ChatOpenAI
@@ -10,7 +9,7 @@ from langchain.utilities import WikipediaAPIWrapper
 from langchain.schema import HumanMessage
 import streamlit as st
 
-os.environ['OPENAI_API_KEY'] = apikey
+os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 
 class StreamHandler(BaseCallbackHandler):
     def __init__(self, container, initial_text=""):
