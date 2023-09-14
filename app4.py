@@ -36,7 +36,7 @@ text_template = PromptTemplate(
 song_template = PromptTemplate(
     input_variables = ['theme','chat_history'],
     template = "```{chat_history}``` Compose the song and name the song from the summarized text using given themes as references.\
-    THEME:({theme}). Show song name above. Show what themes are used in each verse")
+    THEME:({theme}). Show song name above. Show what themes are used in each verse, chorus, bride, outro parentheses at the beginning of the line")
 
 memory = ConversationBufferMemory(input_key='text', memory_key='chat_history')
 
