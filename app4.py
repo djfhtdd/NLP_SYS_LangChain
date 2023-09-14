@@ -9,7 +9,10 @@ from langchain.utilities import WikipediaAPIWrapper
 from langchain.schema import HumanMessage
 import streamlit as st
 
-os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
+with st.sidebar:
+    OPENAI_API_KEY = st.input_text("Enter your OpenAI Api Key Here", type = "password")
+
+# os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 
 class StreamHandler(BaseCallbackHandler):
     def __init__(self, container, initial_text=""):
