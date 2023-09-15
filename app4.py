@@ -52,7 +52,7 @@ memory = ConversationBufferMemory(input_key='text', memory_key='chat_history')
 chat_box=st.empty() # here is the key, setup a empty container first
 stream_handler = StreamHandler(chat_box)
 
-chat = ChatOpenAI(temperature = 0.8, streaming=True,callbacks=[stream_handler])
+chat = ChatOpenAI(model_name = model_name,temperature = temperature, streaming=True,callbacks=[stream_handler])
 text_chain = LLMChain(llm=chat, prompt=text_template, output_key = 'sum', memory = memory)
 song_chain = LLMChain(llm=chat, prompt=song_template, output_key = 'song', memory = memory)
 seq_chain = SequentialChain(chains=[text_chain, song_chain], input_variables = ['text','theme'], return_all = True, verbose=True)
