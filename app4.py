@@ -10,7 +10,10 @@ from langchain.schema import HumanMessage
 import streamlit as st
 
 with st.sidebar:
+    st.markdown(':rainbow[Model adjustment]') 
     os.environ['OPENAI_API_KEY'] = st.text_input('Enter you OpenAI API key here', type='password') or st.secrets['OPENAI_API_KEY']
+    model_name = st.selectbox('Choose model', ('gpt-3.5-turbo', 'gpt-3.5-turbo-16k','gpt-4'))
+    temperature = st.number_input('Choose temperature',  min_value=0.0, max_value=1.0, value= 0.8 , step= 0.05)
 
 class StreamHandler(BaseCallbackHandler):
     def __init__(self, container, initial_text=""):
@@ -34,10 +37,15 @@ text_template = PromptTemplate(
     template = "Summarize ```{text}```"
 )
 
-song_template = PromptTemplate(
+if len(prompt2.split()) <= 15:
+    song_template = PromptTemplate(
     input_variables = ['theme','chat_history'],
     template = "```{chat_history}``` Compose the song and name the song from the summarized text using given themes as references.\
     THEME:({theme}). Show song name above. Show what themes are used in each music structure at the beginning of music structure in parentheses.")
+else:
+    song_template = PromptTemplate(
+    input_variables = ['theme','chat_history'],
+    template = "```{chat_history}``` Turn into a song and name a song based on this lyrics. LYRICS: ```{theme}```")
 
 memory = ConversationBufferMemory(input_key='text', memory_key='chat_history')
 
