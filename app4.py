@@ -11,7 +11,7 @@ import streamlit as st
 
 with st.sidebar:
     st.markdown(':rainbow[Model adjustment]') 
-    os.environ['OPENAI_API_KEY'] = st.text_input('Enter you OpenAI API key here', type='password') or st.secrets['OPENAI_API_KEY']
+    os.environ['OPENAI_API_KEY'] = st.text_input('Enter your OpenAI API key here', type='password') or st.secrets['OPENAI_API_KEY']
     model_name = st.selectbox('Choose model', ('gpt-3.5-turbo', 'gpt-3.5-turbo-16k','gpt-4'))
     temperature = st.number_input('Choose temperature',  min_value=0.0, max_value=1.0, value= 0.8 , step= 0.05)
 
